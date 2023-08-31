@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- Mis cursos -</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="css/styles.css">-->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <p>Agenda Escolar</p>
+            </div>
+
+            <nav>
+                <a href="#">Cerrar Sesion</a>
+                <a href="#">¿Que es Agenda Escolar?</a>
+                <a href="#">Mi Perfil</a>
+                <a href="./index.html">Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+
+        <section id="tabla-cursos">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID Alumno</th>
+                        <th>Apellido</th>
+                        <th>Nombre</th>
+                        <th>Nota</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    <% alumnos.forEach((alumno) => { %>
+                    <tr>
+                        <td><%= alumno.id %></td>
+                        <td><%= alumno.apellido %></td>
+                        <td><%= alumno.nombre %></td>
+                        <td><%= alumno.nota %></td>
+                        <td>
+                            <a href="/editar-nota/<%= alumno.id %>">EDITAR</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+    </section>
+
+    <a href="/cursos-docente">VOLVER</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>

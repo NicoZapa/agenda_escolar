@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- Mis cursos -</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="css/styles.css">-->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <p>Agenda Escolar</p>
+            </div>
+
+            <nav>
+                <a href="#">Cerrar Sesion</a>
+                <a href="#">¿Que es Agenda Escolar?</a>
+                <a href="#">Mi Perfil</a>
+                <a href="./index.html">Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <section id="tabla-cursos">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Materia</th>
+                        <th>Opcion</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% results.forEach((materia) => {%>
+                    <tr>
+                        <td> <%= materia.idmateria %></td>
+                        <td> <%= materia.nombre %> </td>
+                        <td>
+                            <a href="./notas-cursos-docente/<%= materia.idmateria %>">Visualizar</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+
+            </table>
+        </section>
+    </section>
+</body>
+</html>

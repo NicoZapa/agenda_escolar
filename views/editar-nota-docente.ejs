@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- Mis cursos -</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="css/styles.css">-->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <p>Agenda Escolar</p>
+            </div>
+
+            <nav>
+                <a href="#">Cerrar Sesion</a>
+                <a href="#">¿Que es Agenda Escolar?</a>
+                <a href="#">Mi Perfil</a>
+                <a href="./index.html">Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+
+      <% if(alumno) { %>
+        <h3><%= alumno.nombre_materia %></h3>
+        <form action="/update" method="POST">
+
+            <input id="id" name="id"  value="<%= alumno.id %>" hidden>
+            <input id="id_materia" name="id_materia"  value="<%= alumno.id_materia %>" hidden>
+            
+            <div class="mb-3">
+              <label for="nota">NUEVA Nota (0-10):</label>
+              <input type="number" class="form-control" id="nota" name="nota" max="10">
+            </div>
+
+            <div class="mb-3">
+              <label for="nota_actual">NOTA ACTUAL</label>
+              <input type="number" class="form-control" id="nota_actual" name="nota_actual" value="<%= alumno.nota %>" disabled>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Alumno</label>
+              <input type="text" class="form-control" id="exampleInputPassword1" value="<%= alumno.nombre %> <%= alumno.apellido %>" disabled>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <div>
+          ID: <%= alumno.id %> <br>
+          Apellido: <%= alumno.apellido %> <br>
+          Nombre: <%= alumno.nombre %> <br>
+          Nota: <%= alumno.nota %> <br>
+          Id Materia: <%= alumno.id_materia %> <br>
+          Materia: <%= alumno.nombre_materia %>
+        </div>
+
+        <a href="/notas-cursos-docente/<%= alumno.id_materia %>">VOLVER</a>
+      <% } %>
+    </section>
+
+    
+</body>
+</html>
