@@ -32,11 +32,11 @@ router.get('/notas-cursos-docente/:id', (req, res) => {
 
     const id = req.params.id;
 
-    conexion.query('SELECT a.id, a.apellido, a.nombre, n.nota  FROM alumnos a  INNER JOIN materias m ON m.idmateria = a.materia  INNER JOIN notas n ON a.id = n.id_alumno WHERE m.idmateria = ?', [id], (error, results) => {
+    conexion.query('SELECT u.id_usuario, u.nombre, u.apellido, u.dni, ma.id_materia, ma.nombre_materia, ma.anio_cursada, ma.division , i.turno, i.calificacion_trimestre1, i.calificacion_trimestre2, i.calificacion_trimestre3 FROM inscripcion_alumnos_materias AS i INNER JOIN usuarios AS u ON u.id_usuario = i.alumno_id INNER JOIN materias AS ma ON ma.id_materia = i.materia_id WHERE materia_id = ?;', [id], (error, results) => {
         if(error){
             throw error;
         }else{
-            //console.log(results);
+            console.log(results);
             res.render('notas-cursos-docente.ejs', {alumnos: results});
         }
     })
@@ -47,7 +47,7 @@ router.get('/editar-nota/:id', (req, res) => {
 
     const id = req.params.id;
 
-    conexion.query('SELECT a.id, a.apellido, a.nombre, n.nota, m.idmateria AS id_materia ,m.nombre AS nombre_materia  FROM alumnos a  INNER JOIN materias m ON m.idmateria = a.materia  INNER JOIN notas n ON a.id = n.id_alumno WHERE a.id = ?', [id], (error, results) => {
+    conexion.query('SELECT u.id_usuario, u.nombre, u.apellido, u.dni, ma.id_materia, ma.nombre_materia, ma.anio_cursada, ma.division , i.turno, i.calificacion_trimestre1, i.calificacion_trimestre2, i.calificacion_trimestre3 FROM inscripcion_alumnos_materias AS i INNER JOIN usuarios AS u ON u.id_usuario = i.alumno_id INNER JOIN materias AS ma ON ma.id_materia = i.materia_id WHERE id_usuario = ?;', [id], (error, results) => {
         if(error){
             throw error;
         }else{
@@ -57,17 +57,33 @@ router.get('/editar-nota/:id', (req, res) => {
     })
 })
 
+//AGREGAR NOTA
+router.get('/agregar-nota', (req, res) => {
+
+    const id_materia = req.params.id_materia;
+
+    conexion.query('SELECT u.id_usuario, u.nombre, u.apellido, u.dni, u.rol, ma.id_materia, ma.nombre_materia, ma.anio_cursada, ma.division , i.turno, i.calificacion_trimestre1, i.calificacion_trimestre2, i.calificacion_trimestre3 FROM inscripcion_alumnos_materias AS i INNER JOIN usuarios AS u ON u.id_usuario = i.alumno_id INNER JOIN materias AS ma ON ma.id_materia = i.materia_id;', (error, results) => {
+        if(error){
+            throw error;
+        }else{
+            console.log(results);
+            res.render('agregar-nota-docente.ejs', {alumnos: results});
+        }
+    })
+})
+
 // INVOCAMOS EL CRUD
 const crud = require('./controllers/crud'); // => Importa el controlador de CRUD
 router.post('/update', crud.update); // => Llama a la función del controlador
 
-//ELIMINAR NOTA
-/*
-çrouter.get('/delete/:id', (req, res) => {
+//ELIMINAR NOTAS de ALUMNO
+router.get('/delete/:id/:id_materia', (req, res) => {
     
+    console.log(req.params.id)
     const id = req.params.id;
+    const id_materia = req.params.id_materia;
 
-    conexion.query('DELETE FROM alumnos WHERE id = ?', [id], (error, results) => {
+    conexion.query('DELETE FROM inscripcion_alumnos_materias WHERE alumno_id = ? AND materia_id = ?', [id, id_materia], (error, results) => {
         if(error){
             throw error;
         }else{
@@ -75,7 +91,7 @@ router.post('/update', crud.update); // => Llama a la función del controlador
         }
     })
 })
-*/
+
 
 //EXPORTAMOS EL ROUTER PARA QUE LO USE EL app.js
 module.exports = router;

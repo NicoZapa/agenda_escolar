@@ -24,33 +24,31 @@
     </header>
 
     <section id="hero">
+
+        <h3>AGREGAR NOTA</h3>
+
+        <div>
+            <p>Estudiantes</p>
+        </div>
         
         <section id="tabla-cursos">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Materia</th>
-                        <th>Opcion</th>
-                    </tr>
-                </thead>
+            <% alumnos.forEach((alumno) => { %>
+                <% console.log(alumno.nombre)%>
+                <% console.log(alumno.apellido)%>
+                <% console.log(alumno.id_usuario)%>
 
-                <tbody>
-                    <% results.forEach((materia) => {%>
-                    <tr>
-                        <td> <%= materia.id_materia %></td>
-                        <td> <%= materia.nombre_materia %> </td>
-                        <td>
-                            <a href="./notas-cursos-docente/<%= materia.id_materia %>">Visualizar</a>
-                        </td>
-                    </tr>
-                    <% }) %>
-                </tbody>
-
-            </table>
+                <% if(alumno.rol == 'Estudiante' ) {%>
+                    <button class="mostrar-info"><%= alumno.nombre + " " + alumno.apellido %></button>
+                <% } %>
+                
+            <% }) %>
         </section>
     </section>
 
-    <a href="/agregar-nota">AGREGAR NOTA</a>
+    <a href="/cursos-docente">VOLVER</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    
 </body>
 </html>
