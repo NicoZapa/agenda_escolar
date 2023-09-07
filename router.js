@@ -9,6 +9,10 @@ router.get('/', (req, res) => {
     res.render('login.ejs');
 })
 
+router.get('/administrador', (req, res) => {
+    res.render('index-admin.ejs');
+})
+
 //** DOCENTE
 //INICIO
 router.get('/docente', (req, res) => {
