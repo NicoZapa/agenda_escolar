@@ -58,7 +58,7 @@
                         <td><%= alumno.calificacion_trimestre2 %></td>
                         <td><%= alumno.calificacion_trimestre3 %></td>
                         <td>
-                            <a href="/editar-nota/<%= alumno.id_usuario %>">EDITAR</a>
+                            <a href="/editar-nota/<%= alumno.id_usuario %>/<%= alumno.id_materia %>">EDITAR</a>
                             <a href="/delete/<%= alumno.id_usuario %>/<%= alumno.id_materia %>">ELIMINAR</a>
                         </td>
                     </tr>

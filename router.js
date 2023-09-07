@@ -43,11 +43,12 @@ router.get('/notas-cursos-docente/:id', (req, res) => {
 })
 
 //EDITAR NOTA
-router.get('/editar-nota/:id', (req, res) => {
+router.get('/editar-nota/:id/:id_materia', (req, res) => {
 
     const id = req.params.id;
+    const id_materia = req.params.id_materia;
 
-    conexion.query('SELECT u.id_usuario, u.nombre, u.apellido, u.dni, ma.id_materia, ma.nombre_materia, ma.anio_cursada, ma.division , i.turno, i.calificacion_trimestre1, i.calificacion_trimestre2, i.calificacion_trimestre3 FROM inscripcion_alumnos_materias AS i INNER JOIN usuarios AS u ON u.id_usuario = i.alumno_id INNER JOIN materias AS ma ON ma.id_materia = i.materia_id WHERE id_usuario = ?;', [id], (error, results) => {
+    conexion.query('SELECT u.id_usuario, u.nombre, u.apellido, u.dni, ma.id_materia, ma.nombre_materia, ma.anio_cursada, ma.division , i.turno, i.calificacion_trimestre1, i.calificacion_trimestre2, i.calificacion_trimestre3 FROM inscripcion_alumnos_materias AS i INNER JOIN usuarios AS u ON u.id_usuario = i.alumno_id INNER JOIN materias AS ma ON ma.id_materia = i.materia_id WHERE id_usuario = ? AND id_materia = ?;', [id, id_materia], (error, results) => {
         if(error){
             throw error;
         }else{
@@ -62,7 +63,7 @@ router.get('/agregar-nota', (req, res) => {
 
     const id_materia = req.params.id_materia;
 
-    conexion.query('SELECT u.id_usuario, u.nombre, u.apellido, u.dni, u.rol, ma.id_materia, ma.nombre_materia, ma.anio_cursada, ma.division , i.turno, i.calificacion_trimestre1, i.calificacion_trimestre2, i.calificacion_trimestre3 FROM inscripcion_alumnos_materias AS i INNER JOIN usuarios AS u ON u.id_usuario = i.alumno_id INNER JOIN materias AS ma ON ma.id_materia = i.materia_id;', (error, results) => {
+    conexion.query("SELECT u.id_usuario, u.nombre, u.apellido, u.dni, u.rol, ma.id_materia, ma.nombre_materia, ma.anio_cursada, ma.division , i.turno, i.calificacion_trimestre1, i.calificacion_trimestre2, i.calificacion_trimestre3 FROM inscripcion_alumnos_materias AS i INNER JOIN usuarios AS u ON u.id_usuario = i.alumno_id INNER JOIN materias AS ma ON ma.id_materia = i.materia_id;", (error, results) => {
         if(error){
             throw error;
         }else{

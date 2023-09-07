@@ -37,9 +37,11 @@
             <% alumnos.forEach((alumno) => { %>
 
                 <% if (alumno.rol == 'Estudiante') { %>
-                    <button class="mostrar-info" 
+                    <button class="mostrar-info"
+                            data-id="<%= alumno.id %>"
                             data-nombre="<%= alumno.nombre %>" 
                             data-apellido="<%= alumno.apellido %>"
+                            data-dni="<%= alumno.dni %>"
                             data-calificacion1="<%= alumno.calificacion_trimestre1 %>"
                             data-calificacion2="<%= alumno.calificacion_trimestre2 %>"
                             data-calificacion3="<%= alumno.calificacion_trimestre3 %>">
@@ -51,6 +53,11 @@
                 
             <% }) %>
 
+
+            <select name="materia" id="materia" class="form-select" style="width:300px;">
+                <option value="" disabled selected>Elige un alumno...</option>
+            </select>
+
             <form style="margin-top: 30px;" action="/update" method="POST">
                 
                 <div class="mb-3">
@@ -61,6 +68,11 @@
                 <div class="mb-3">
                     <label for="apellido">Apellido</label>
                     <input type="text" id="apellido" name="apellido" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" readonly>
                 </div>
 
                 <div class="mb-3">
@@ -88,9 +100,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
     <script>
+
         // Obtener los elementos de entrada y los botones con la clase "mostrar-info"
         const inputNombre = document.getElementById('nombre');
         const inputApellido = document.getElementById('apellido');
+        const inputDni = document.getElementById('dni');
         const inputCalificacion1 = document.getElementById('nota1');
         const inputCalificacion2 = document.getElementById('nota2');
         const inputCalificacion3 = document.getElementById('nota3');
@@ -102,6 +116,7 @@
                 // Obtener los valores del atributo "data" del botón (nombre y apellido)
                 const nombre = boton.getAttribute('data-nombre');
                 const apellido = boton.getAttribute('data-apellido');
+                const dni = boton.getAttribute('data-dni');
                 const calificacion1 = boton.getAttribute('data-calificacion1');
                 const calificacion2 = boton.getAttribute('data-calificacion2');
                 const calificacion3 = boton.getAttribute('data-calificacion3');
@@ -109,10 +124,27 @@
                 // Establecer los valores en los campos de entrada
                 inputNombre.value = nombre;
                 inputApellido.value = apellido;
+                inputDni.value = dni;
                 inputCalificacion1.value = calificacion1;
                 inputCalificacion2.value = calificacion2;
                 inputCalificacion3.value = calificacion3;
             });
+        });
+
+        $('.mostrar-info').on('click', function() {
+            // Obtén los atributos de datos del botón
+            var id = $(this).data('id');
+            var nombre = $(this).data('nombre');
+            var apellido = $(this).data('apellido');
+            
+            // Actualiza el texto del select
+            $('#materia').html('<option value="" disabled selected>Elige una materia para ' + nombre + ' ' + apellido + '...</option>');
+
+            // Aquí puedes agregar lógica para obtener y agregar las materias asociadas al alumno
+            // Puedes hacer una solicitud AJAX o usar datos preexistentes para llenar las opciones del select.
+            // Por ejemplo:
+            // $('#materia').append('<option value="Materia1">Materia 1</option>');
+            // $('#materia').append('<option value="Materia2">Materia 2</option>');
         });
     </script>
     
