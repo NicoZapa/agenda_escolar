@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- Mis cursos -</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="css/styles.css">-->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <p>Agenda Escolar</p>
+            </div>
+
+            <nav>
+                <a href="#">Cerrar Sesion</a>
+                <a href="#">¿Que es Agenda Escolar?</a>
+                <a href="#">Mi Perfil</a>
+                <a href="./index.html">Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+
+      <h2>EDICION DE NOTAS</h2>
+        
+        <form action="/save" method="POST">
+            
+            <div class="mb-3">
+                <label for="nombremateria">Nombre Materia: </label>
+                <input type="text" id="nombremateria" name="nombremateria">
+            </div>
+
+            <div class="mb-3">
+                <label for="anio">Año</label>
+                <select id="anio" name="anio" class="form-select">
+                    <option value="1" disabled selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="division">Division</label>
+                <select name="division" id="division" class="form-select">
+                    <option value="a">A</option>
+                    <option value="b">B</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="docente">Docente</label>
+                <select name="docente" id="docente">
+                    <% usuarios.forEach((usuario) => {%>
+                        <% if(usuario.rol == "Docente"){ %>
+                            <option value="<%= usuario.id_usuario %>">
+                                <%= usuario.nombre %> <%= usuario.apellido %>
+                            </option>
+                        <% } %>
+                    <% }) %>
+                </select>
+                    
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <a href="/administrador>">VOLVER</a>
+    </section>
+
+    
+</body>
+</html>

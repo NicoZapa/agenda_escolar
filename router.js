@@ -4,16 +4,14 @@ const conexion = require('./database/db');
 const path = require ('path');
 
 
-//** LOGIN
+//******************************************************
+//************** LOGIN *************************
 router.get('/', (req, res) => {
     res.render('login.ejs');
 })
 
-router.get('/administrador', (req, res) => {
-    res.render('index-admin.ejs');
-})
-
-//** DOCENTE
+//******************************************************
+//************** DOCENTE *************************
 //INICIO
 router.get('/docente', (req, res) => {
     res.render('index-docente.ejs');
@@ -77,9 +75,7 @@ router.get('/agregar-nota', (req, res) => {
     })
 })
 
-// INVOCAMOS EL CRUD
-const crud = require('./controllers/crud'); // => Importa el controlador de CRUD
-router.post('/update', crud.update); // => Llama a la función del controlador
+
 
 //ELIMINAR NOTAS de ALUMNO
 router.get('/delete/:id/:id_materia', (req, res) => {
@@ -97,6 +93,29 @@ router.get('/delete/:id/:id_materia', (req, res) => {
     })
 })
 
+//******************************************************
+//************** ADMINISTRADOR *************************
+//INICIO
+router.get('/administrador', (req, res) => {
+    res.render('index-admin.ejs');
+})
+
+//CREAR MATERIA
+router.get('/crear-materia', (req, res) => {
+
+    conexion.query('SELECT * FROM usuarios;', (error, results) => {
+        if(error){
+            throw error
+        }else{
+            res.render('crear-materia-admin.ejs', {usuarios: results});
+        }
+    })
+    
+})
+
+// INVOCAMOS EL CRUD
+const crud = require('./controllers/crud'); // => Importa el controlador de CRUD
+router.post('/update', crud.update); // => Llama a la función del controlador
 
 //EXPORTAMOS EL ROUTER PARA QUE LO USE EL app.js
 module.exports = router;
