@@ -13,17 +13,17 @@ router.get('/', (req, res) => {
 //******************************************************
 //************** DOCENTE *************************
 //INICIO
-router.get('/docente', (req, res) => {
+/*router.get('/docente', (req, res) => {
     res.render('index-docente.ejs');
-})
+})*/
 
 //CURSOS DOCENTE
-router.get('/cursos-docente', (req, res) => {
+router.get('/docente', (req, res) => {
     conexion.query('SELECT * FROM materias', (error, results) => {
         if(error){
             throw error;
         }else{
-            res.render('cursos-docente.ejs', {results: results});
+            res.render('index-docente.ejs', {results: results});
         }
     })
 })

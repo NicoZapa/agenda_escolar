@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>- Mis cursos -</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <!--<link rel="stylesheet" href="css/styles.css">-->
 </head>
 <body>
@@ -31,18 +32,18 @@
             <option value="Tarde">Tarde</option>
         </select>
 
-        <section id="tabla-cursos">
-            <table class="table table-striped">
+        <div class="container">
+            <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>ID Alumno</th>
-                        <th>Apellido</th>
-                        <th>Nombre</th>
-                        <th>Turno</th>
-                        <th>Nota 1º Trimestre</th>
-                        <th>Nota 2º Trimestre</th>
-                        <th>Nota 3º Trimestre</th>
-                        <th>Opciones</th>
+                        <th class="text-center">ID Alumno</th>
+                        <th class="text-center">Apellido</th>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Turno</th>
+                        <th class="text-center">Nota 1º Trimestre</th>
+                        <th class="text-center">Nota 2º Trimestre</th>
+                        <th class="text-center">Nota 3º Trimestre</th>
+                        <th class="text-center">Opciones</th>
                     </tr>
                 </thead>
         
@@ -50,26 +51,26 @@
                     <% alumnos.forEach((alumno) => { %>
 
                     <tr>
-                        <td><%= alumno.id_usuario %></td>
-                        <td><%= alumno.apellido %></td>
-                        <td><%= alumno.nombre %></td>
-                        <td><%= alumno.turno %></td>
-                        <td><%= alumno.calificacion_trimestre1 %></td>
-                        <td><%= alumno.calificacion_trimestre2 %></td>
-                        <td><%= alumno.calificacion_trimestre3 %></td>
-                        <td>
-                            <a href="/editar-nota/<%= alumno.id_usuario %>/<%= alumno.id_materia %>">EDITAR</a>
-                            <a href="/delete/<%= alumno.id_usuario %>/<%= alumno.id_materia %>">ELIMINAR</a>
+                        <td class="text-center"><%= alumno.id_usuario %></td>
+                        <td class="text-center"><%= alumno.apellido %></td>
+                        <td class="text-center"><%= alumno.nombre %></td>
+                        <td class="text-center"><%= alumno.turno %></td>
+                        <td class="text-center"><%= alumno.calificacion_trimestre1 %></td>
+                        <td class="text-center"><%= alumno.calificacion_trimestre2 %></td>
+                        <td class="text-center"><%= alumno.calificacion_trimestre3 %></td>
+                        <td class="text-center">
+                            <a href="/editar-nota/<%= alumno.id_usuario %>/<%= alumno.id_materia %>" class="boton">EDITAR</a>
+                            <a href="/delete/<%= alumno.id_usuario %>/<%= alumno.id_materia %>" class="boton">ELIMINAR</a>
                         </td>
                     </tr>
                     
                     <% }) %>
                 </tbody>
             </table>
-        </section>
+        </div>
     </section>
 
-    <a href="/cursos-docente">VOLVER</a>
+    <a href="/docente">VOLVER</a>
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

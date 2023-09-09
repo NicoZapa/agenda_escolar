@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>- Agenda Escolar -</title>
+    <title>- Mis cursos -</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
     <!--<link rel="stylesheet" href="css/styles.css">-->
-
 </head>
 <body>
-
     <header>
         <div class="container">
             <div class="logo">
@@ -16,22 +15,42 @@
             </div>
 
             <nav>
-                <a href="#">Cerrar Sesion</a>
+                <a href="/">Cerrar Sesion</a>
                 <a href="#">¿Que es Agenda Escolar?</a>
                 <a href="#">Mi Perfil</a>
-                <a href="./index-docente">Inicio</a>
+                <a href="./index.html">Inicio</a>
             </nav>
         </div>
     </header>
 
     <section id="hero">
-        <h1>Bienvenido Docente</h1>
-        <div id="botones-inicio">
-            <a id="index-btn" href="./cursos-docente">Mis Cursos</a>
+        
+        <div class="container">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Materia</th>
+                        <th class="text-center">Opcion</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% results.forEach((materia) => {%>
+                    <tr>
+                        <td class="text-center"> <%= materia.id_materia %></td>
+                        <td class="text-center"> <%= materia.nombre_materia %> </td>
+                        <td class="text-center">
+                            <a href="./notas-cursos-docente/<%= materia.id_materia %>">Visualizar</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+
+            </table>
         </div>
     </section>
 
-    <a href="/">VOLVER AL LOGIN</a>
-    
+    <!--<a href="/agregar-nota">AGREGAR NOTA</a>-->
 </body>
 </html>

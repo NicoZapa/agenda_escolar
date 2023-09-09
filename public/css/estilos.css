@@ -12,7 +12,7 @@
     padding: 2px;
 }
 
-.boton-admin {
+.boton {
     display: inline-block;
     padding: 10px 20px; /* Espaciado interno */
     text-decoration: none; /* Elimina el subrayado del enlace */
@@ -25,7 +25,7 @@
 }
 
 /* Estilos adicionales cuando el mouse pasa sobre el enlace */
-.boton-admin:hover {
+.boton:hover {
     background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse */
 }
 

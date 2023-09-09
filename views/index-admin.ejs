@@ -17,7 +17,7 @@
             </div>
 
             <nav>
-                <a href="#">Cerrar Sesion</a>
+                <a href="/">Cerrar Sesion</a>
                 <a href="#">¿Que es Agenda Escolar?</a>
                 <a href="#">Mi Perfil</a>
                 <a href="./index-docente">Inicio</a>
@@ -39,24 +39,24 @@
                         <tr>
                             <th class="text-center">ID</th>
                             <th class="text-center">Nombre</th>
+                            <th class="text-center">Docente asignado</th>
                         </tr>
                     </thead>
                 
 
                     <tbody>
                         <% materias.forEach((materia) => { %>
-                                <tr>
-                                    
-                                    <td class="text-center"><%= materia.id_materia %></td>
-                                    <td class="text-center"><%= materia.nombre_materia %></td>
-                                </tr>
+                            <tr>
+                                <td class="text-center"><%= materia.id_materia %></td>
+                                <td class="text-center"><%= materia.nombre_materia %></td>
+                            </tr>
                         <% }) %>
                     </tbody>
                     
                 </table>
                 
                 <div>
-                    <a href="/crear-materia" class="boton-admin">Crear materia</a>
+                    <a href="/crear-materia" class="boton">Crear materia</a>
                 </div>
                 
             </div>
@@ -107,7 +107,7 @@
                     
                 </table>
                 <div>
-                    <a href="#" class="boton-admin">Crear Alumno</a>
+                    <a href="#" class="boton">Crear Alumno</a>
                 </div>
             </div>
 
@@ -157,7 +157,7 @@
                 </table>
 
                 <div>
-                    <a href="#" class="boton-admin">Crear Docente</a>
+                    <a href="#" class="boton">Crear Docente</a>
                 </div>
                 
             </div>
