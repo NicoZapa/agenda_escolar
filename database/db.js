@@ -5,6 +5,7 @@ const conexion = mysql.createConnection({
     user:'root',
     password:'Password1234',
     database:'Escuela_AgendaEscolar_2023',
+    multipleStatements: true
 })
 
 //Establecemos la conexion con la Base de Datos

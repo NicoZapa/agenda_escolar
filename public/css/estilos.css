@@ -1,0 +1,47 @@
+.container{
+    margin: 20px;
+    width: 80%;
+    height: 300px auto;
+    padding: 2px;
+}
+
+.a-admin{
+    background-color: Cyan;
+    color: black;
+    text-decoration: none;
+    padding: 2px;
+}
+
+.boton-admin {
+    display: inline-block;
+    padding: 10px 20px; /* Espaciado interno */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    background-color: #007bff; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    margin-bottom: 10px;
+}
+
+/* Estilos adicionales cuando el mouse pasa sobre el enlace */
+.boton-admin:hover {
+    background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse */
+}
+
+.boton-volver {
+    display: inline-block;
+    padding: 10px 20px; /* Espaciado interno */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    background-color: #00ff73; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    margin-bottom: 10px;
+}
+
+/* Estilos adicionales cuando el mouse pasa sobre el enlace */
+.boton-volver:hover {
+    background-color: #00be56; /* Cambia el color de fondo al pasar el mouse */
+}

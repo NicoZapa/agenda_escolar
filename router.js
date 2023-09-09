@@ -97,7 +97,22 @@ router.get('/delete/:id/:id_materia', (req, res) => {
 //************** ADMINISTRADOR *************************
 //INICIO
 router.get('/administrador', (req, res) => {
-    res.render('index-admin.ejs');
+
+    const queries = [
+        "SELECT * FROM usuarios",
+        "SELECT * FROM materias"
+    ]
+
+    conexion.query(queries.join(';'), (error, results) => {
+        if(error){
+            throw error;
+        }else{
+            res.render('index-admin.ejs', {
+                usuarios: results[0],
+                materias: results[1]
+            });
+        }
+    })
 })
 
 //CREAR MATERIA
