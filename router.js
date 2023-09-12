@@ -100,7 +100,7 @@ router.get('/administrador', (req, res) => {
 
     const queries = [
         "SELECT * FROM usuarios",
-        "SELECT * FROM materias"
+        "SELECT * FROM usuarios INNER JOIN materias ON materias.profesor_id = usuarios.id_usuario;"
     ]
 
     conexion.query(queries.join(';'), (error, results) => {
@@ -128,9 +128,47 @@ router.get('/crear-materia', (req, res) => {
     
 })
 
+//EDITAR MATERIA
+router.get('/editar-materia/:id', (req, res) => {
+
+    const id = req.params.id;
+
+    conexion.query('SELECT * FROM usuarios INNER JOIN materias ON materias.profesor_id = usuarios.id_usuario WHERE id_materia = ?', [id] , (error, results) => {
+        if(error){
+            throw error;
+        }else{
+            console.log(results);
+            res.render('editar-materia-admin.ejs', {materia: results[0]});
+        }
+    })
+})
+
+//ELIMINAR MATERIA
+router.get('/delete-materia/:id', (req, res) => {
+
+    const id = req.params.id;
+
+    conexion.query('DELETE FROM materias WHERE id_materia = ?', [id], (error, results) => {
+        if(error){
+            throw error;
+        }else{
+            res.redirect('/administrador');
+        }
+    })
+})
+
+//************************
+//********* CRUD *********/
+
 // INVOCAMOS EL CRUD
 const crud = require('./controllers/crud'); // => Importa el controlador de CRUD
+const crudadmin = require('./controllers/crudadmin');
+
+//CRUD DOCENTE
 router.post('/update', crud.update); // => Llama a la función del controlador
+
+//CRUD ADMIN
+router.post('/save-materia', crudadmin.save);
 
 //EXPORTAMOS EL ROUTER PARA QUE LO USE EL app.js
 module.exports = router;
