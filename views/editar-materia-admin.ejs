@@ -32,11 +32,10 @@
             <div class="container">
 
                 <h3>Editar Materia: <%= materia.nombre_materia %></h3>
-                <%console.log(materia.nombre_materia)%>
                 
-                <form action="/editar-materia">
+                <form action="/editar-materia" method="POST">
 
-                    <input id="id" name="id"  value="<%= materia.id_materia %>" hidden>
+                    <input id="id_materia" name="id_materia"  value="<%= materia.id_materia %>" hidden>
                     
                     <div>
                         <label for="nombremateria" class="form-label">Nombre materia</label>
@@ -53,8 +52,26 @@
                         <input type="text" class="form-control" id="division" name="division" value="<%= materia.division %>">
                     </div>
 
-                    <h1>Falta Docente</h1>
+                    <div>
+                        <label for="docente" class="form-label">Docente: </label>
+                        
+                            <select name="docente" id="docente">
+                                <option value="<%= materia.id_usuario %>" selected>
+                                    <%= materia.nombre %> <%= materia.apellido %>
+                                </option>
 
+                                <% profesores.forEach((profe) => { %>
+                                    <% if(materia.id_usuario != profe.id_usuario){ %>
+                                        <option value="<%= profe.id_usuario %>">
+                                            <%= profe.nombre %> <%= profe.apellido %>
+                                        </option>
+                                    <%}%>
+                                <% }) %>
+                            </select>
+                        
+                    </div>  
+                    
+                    <button type="submit" class="btn btn-primary"> GUARDAR CAMBIOS </button>
                 </form>
                 
             </div>

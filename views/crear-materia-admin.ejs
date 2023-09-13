@@ -54,6 +54,7 @@
             <div class="mb-3">
                 <label for="docente">Docente</label>
                 <select name="docente" id="docente">
+                    <option disabled selected>Seleccione un docente</option>
                     <% usuarios.forEach((usuario) => {%>
                         <% if(usuario.rol == "Docente"){ %>
                             <option value="<%= usuario.id_usuario %>">

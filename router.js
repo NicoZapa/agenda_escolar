@@ -130,18 +130,35 @@ router.get('/crear-materia', (req, res) => {
 
 //EDITAR MATERIA
 router.get('/editar-materia/:id', (req, res) => {
-
     const id = req.params.id;
 
-    conexion.query('SELECT * FROM usuarios INNER JOIN materias ON materias.profesor_id = usuarios.id_usuario WHERE id_materia = ?', [id] , (error, results) => {
-        if(error){
-            throw error;
-        }else{
-            console.log(results);
-            res.render('editar-materia-admin.ejs', {materia: results[0]});
+    const query1 = "SELECT * FROM materias INNER JOIN usuarios ON usuarios.id_usuario = materias.profesor_id WHERE id_materia = ?";
+    const query2 = "SELECT * FROM usuarios WHERE rol = 'Docente'";
+
+    conexion.query(query1, [id], (error1, results1) => {
+        if (error1) {
+            throw error1;
+        } else {
+            // Procesar los resultados de la primera consulta (results1)
+            conexion.query(query2, (error2, results2) => {
+                if (error2) {
+                    throw error2;
+                } else {
+                    // Procesar los resultados de la segunda consulta (results2)
+                    console.log("****EDITAR-MATERIA*****");
+                    console.log(results1);
+                    console.log(results2);
+
+                    res.render('editar-materia-admin.ejs', {
+                        materia: results1[0],
+                        profesores: results2 // Puedes pasar los resultados de ambas consultas a la plantilla
+                    });
+                }
+            });
         }
-    })
-})
+    });
+
+});
 
 //ELIMINAR MATERIA
 router.get('/delete-materia/:id', (req, res) => {
@@ -169,6 +186,7 @@ router.post('/update', crud.update); // => Llama a la función del controlador
 
 //CRUD ADMIN
 router.post('/save-materia', crudadmin.save);
+router.post('/editar-materia', crudadmin.update);
 
 //EXPORTAMOS EL ROUTER PARA QUE LO USE EL app.js
 module.exports = router;
