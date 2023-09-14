@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- Mis cursos -</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="css/styles.css">-->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <p>Agenda Escolar</p>
+            </div>
+
+            <nav>
+                <a href="#">Cerrar Sesion</a>
+                <a href="#">¿Que es Agenda Escolar?</a>
+                <a href="#">Mi Perfil</a>
+                <a href="./index.html">Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        
+        <% if(alumno){ %>
+        <h2>EDITAR ALUMNO: <%=alumno.nombre%> <%=alumno.apellido%></h2>
+        
+        <form action="/editar-alumno" method="POST">
+            
+            <div class="container">
+                <input type="text" id="id" name="id" value="<%=alumno.id_usuario%>" hidden>
+                <input type="text" id="rol" name="rol" value="<%=alumno.rol%>" hidden>
+
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="<%=alumno.nombre%>">
+
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="apellido" name="apellido" value="<%=alumno.apellido%>">
+
+                <label for="dni" class="form-label">DNI</label>
+                <input type="text" class="form-control" id="dni" name="dni" value="<%=alumno.dni%>">
+
+                <label for="correo" class="form-label">CORREO</label>
+                <input type="text" class="form-control" id="correo" name="correo" value="<%=alumno.correo%>">
+
+                <% const fechaOriginal = new Date(alumno.fecha_nacimiento); %>
+                <% const año = fechaOriginal.getFullYear(); %>
+                <% const mes = String(fechaOriginal.getMonth() + 1).padStart(2, '0'); %> 
+                <% const dia = String(fechaOriginal.getDate()).padStart(2, '0'); %>
+                <% const fechaFormateada = `${año}-${mes}-${dia}`; %>
+
+                <label for="fecha_nacimiento" class="form-label">FECHA DE NACIMIENTO</label>
+                <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="<%=fechaFormateada%>">
+
+                <label for="direccion" class="form-label">DIRECCION</label>
+                <input type="text" class="form control" id="direccion" name="direccion" value="<%=alumno.direccion%>">
+
+                <label for="telefono" class="form-label">TELEFONO</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" value="<%=alumno.telefono%>">
+                
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            
+        </form>
+
+        <a href="/administrador">VOLVER</a>
+        <% } %>
+    </section>
+
+    
+</body>
+</html>

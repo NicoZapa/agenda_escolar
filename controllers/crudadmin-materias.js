@@ -28,7 +28,6 @@ exports.save = (req, res) => {
         if(error){
             throw error;
         }else{
-            alert('MATERIA AGREGADA EXITOSAMENTE!!');
             res.redirect('/administrador');
         }
     })

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- Mis cursos -</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="css/styles.css">-->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <p>Agenda Escolar</p>
+            </div>
+
+            <nav>
+                <a href="#">Cerrar Sesion</a>
+                <a href="#">¿Que es Agenda Escolar?</a>
+                <a href="#">Mi Perfil</a>
+                <a href="./index.html">Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+
+      <h2>CREAR ALUMNO</h2>
+        
+        <form action="/save-alumno" method="POST">
+
+           <input type="text" id="rol" name="rol" value="Estudiante" hidden>
+            
+            <div class="mb-3">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre">
+            </div>
+
+            <div class="mb-3">
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido">
+            </div>
+
+            <div class="mb-3">
+                <label for="dni">DNI</label>
+                <input type="text" id="dni" name="dni" maxlength="9">
+            </div>
+
+            <div class="mb-3">
+                <label for="correo">CORREO</label>
+                <input type="email" id="correo" name="correo">
+            </div>
+
+            <div class="mb-3">
+                <label for="fecha_nacimiento">FECHA DE NACIMIENTO</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+            </div>
+
+            <div class="mb-3">
+                <label for="direccion">DIRECCION</label>
+                <input type="text" id="direccion" name="direccion">
+            </div>
+
+            <div class="mb-3">
+                <label for="telefono">TELEFONO</label>
+                <input type="text" id="telefono" name="telefono">
+            </div>
+
+            <div class="mb-3">
+                <label for="contrasenia">CONTRASEÑA</label>
+                <input type="password" id="contrasenia" name="contrasenia">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <a href="/administrador">VOLVER</a>
+    </section>
+
+    
+</body>
+</html>

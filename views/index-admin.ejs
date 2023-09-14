@@ -113,8 +113,9 @@
                                         <td class="text-center"><%= usuario.direccion %></td>
                                         <td class="text-center"><%= usuario.telefono %></td>
                                         <td class="text-center">
-                                            <a href="#" class="boton-tabla">Editar</a>
-                                            <a href="#" class="boton-tabla">Eliminar</a>
+                                            <a href="/reset-password/<%=usuario.id_usuario%>" class="boton-tabla">Contraseña</a>
+                                            <a href="/editar-alumno/<%=usuario.id_usuario%>" class="boton-tabla">Editar</a>
+                                            <a href="/delete-alumno/<%=usuario.id_usuario%>" class="boton-tabla">Eliminar</a>
                                         </td>
                                     <% } %>
                                 </tr>
@@ -123,7 +124,7 @@
                     
                 </table>
                 <div>
-                    <a href="#" class="boton">Crear Alumno</a>
+                    <a href="/crear-alumno" class="boton">Crear Alumno</a>
                 </div>
             </div>
 
@@ -167,8 +168,9 @@
                                         <td class="text-center"><%= usuario.direccion %></td>
                                         <td class="text-center"><%= usuario.telefono %></td>
                                         <td class="text-center">
-                                            <a href="#" class="boton-tabla">Editar</a>
-                                            <a href="#" class="boton-tabla">Eliminar</a>
+                                            <a href="/reset-password/<%=usuario.id_usuario%>" class="boton-tabla">Contraseña</a>
+                                            <a href="/editar-docente/<%=usuario.id_usuario%>" class="boton-tabla">Editar</a>
+                                            <a href="/delete-alumno/<%=usuario.id_usuario%>" class="boton-tabla">Eliminar</a>
                                         </td>
                                     <% } %>
                                 </tr>
@@ -178,7 +180,7 @@
                 </table>
 
                 <div>
-                    <a href="#" class="boton">Crear Docente</a>
+                    <a href="/crear-docente" class="boton">Crear Docente</a>
                 </div>
                 
             </div>
@@ -188,6 +190,7 @@
     </section>
 
     <a href="/" class="boton-volver">VOLVER AL LOGIN</a>
+
     
 </body>
 </html>

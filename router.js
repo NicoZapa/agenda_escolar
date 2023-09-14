@@ -115,6 +115,8 @@ router.get('/administrador', (req, res) => {
     })
 })
 
+//*****************
+//******MATERIAS
 //CREAR MATERIA
 router.get('/crear-materia', (req, res) => {
 
@@ -174,19 +176,134 @@ router.get('/delete-materia/:id', (req, res) => {
     })
 })
 
+//*****************
+//******ALUMNOS
+
+//CREAR ALUMNO
+router.get('/crear-alumno', (req, res) => {
+
+    conexion.query('SELECT * FROM usuarios;', (error, results) => {
+        if(error){
+            throw error
+        }else{
+            res.render('crear-alumno-admin.ejs', {usuarios: results});
+        }
+    })
+    
+})
+
+//EDITAR ALUMNO
+router.get('/editar-alumno/:id', (req, res) => {
+    const id = req.params.id;
+
+    conexion.query('SELECT * FROM usuarios WHERE id_usuario=?', [id], (error, results) => {
+        if(error){
+            throw error;
+        }else{
+            res.render('editar-alumno-admin.ejs', {alumno: results[0]})
+        }
+    })
+})
+
+//ELIMINAR ALUMNO
+router.get('/delete-alumno/:id', (req, res) => {
+    const id = req.params.id;
+
+    // Primero, elimina registros relacionados en inscripcion_alumnos_materias
+    conexion.query('DELETE FROM inscripcion_alumnos_materias WHERE alumno_id = ?', [id], (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            // Luego, elimina el usuario de la tabla usuarios
+            conexion.query('DELETE FROM usuarios WHERE id_usuario = ?', [id], (error, results) => {
+                if (error) {
+                    throw error;
+                } else {
+                    res.redirect('/administrador');
+                }
+            });
+        }
+    });
+});
+
+//RESET DE CONTRASEÑAS
+router.get('/reset-password/:id', (req, res) => {
+    const id = req.params.id;
+
+    conexion.query('SELECT * FROM usuarios WHERE id_usuario=?', [id], (error, results) => {
+        if(error){
+            throw error;
+        }else{
+            res.render('reset-password-admin.ejs', {alumno: results[0]})
+        }
+    })
+})
+
+
+//*****************
+//******DOCENTE
+//CREAR DOCENTE
+router.get('/crear-docente', (req, res) => {
+
+    conexion.query('SELECT * FROM usuarios;', (error, results) => {
+        if(error){
+            throw error
+        }else{
+            res.render('crear-docente-admin.ejs', {usuarios: results});
+        }
+    })
+    
+})
+
+//EDITAR DOCENTE
+router.get('/editar-docente/:id', (req, res) => {
+    const id = req.params.id;
+
+    conexion.query('SELECT * FROM usuarios WHERE id_usuario=?', [id], (error, results) => {
+        if(error){
+            throw error;
+        }else{
+            res.render('editar-docente-admin.ejs', {docente: results[0]})
+        }
+    })
+})
+
+//ELIMINAR ALUMNO
+router.get('/delete-alumno/:id', (req, res) => {
+    const id = req.params.id;
+
+    // Primero, elimina registros relacionados en inscripcion_alumnos_materias
+    conexion.query('DELETE FROM usuarios WHERE alumno_id = ?', [id], (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.redirect('/administrador');
+        }
+    });
+});
+
+
 //************************
 //********* CRUD *********/
-
 // INVOCAMOS EL CRUD
 const crud = require('./controllers/crud'); // => Importa el controlador de CRUD
-const crudadmin = require('./controllers/crudadmin');
+const crudAdminMaterias = require('./controllers/crudadmin-materias');
+const crudAdminAlumnos = require('./controllers/crudadmin-alumnos');
+const crudContrasenia = require('./controllers/crudcontrasenia');
 
 //CRUD DOCENTE
 router.post('/update', crud.update); // => Llama a la función del controlador
 
-//CRUD ADMIN
-router.post('/save-materia', crudadmin.save);
-router.post('/editar-materia', crudadmin.update);
+//CRUD ADMIN MATERIAS
+router.post('/save-materia', crudAdminMaterias.save);
+router.post('/editar-materia', crudAdminMaterias.update);
+
+//CRUD ADMIN ALUMNOS
+router.post('/save-usuario', crudAdminAlumnos.save);
+router.post('/editar-usuario', crudAdminAlumnos.update);
+
+//RESET PASSWORD
+router.post('/reset-password', crudContrasenia.update);
 
 //EXPORTAMOS EL ROUTER PARA QUE LO USE EL app.js
 module.exports = router;
