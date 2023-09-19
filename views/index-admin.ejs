@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/estilos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
+
 </head>
 <body>
 
@@ -68,6 +69,7 @@
                 
                 <div>
                     <a href="/crear-materia" class="boton">Crear materia</a>
+                    <a href="#" class="boton">Asociar alumno</a>
                 </div>
                 
             </div>
@@ -149,7 +151,7 @@
 
 
                     <tbody>
-                        <% usuarios.forEach((usuario) => { %>
+                        <% usuarios.forEach((usuario, i1) => { %>
                             
                                 <tr>
                                     <% if(usuario.rol == "Docente") {%>
@@ -170,7 +172,21 @@
                                         <td class="text-center">
                                             <a href="/reset-password/<%=usuario.id_usuario%>" class="boton-tabla">Contraseña</a>
                                             <a href="/editar-docente/<%=usuario.id_usuario%>" class="boton-tabla">Editar</a>
-                                            <a href="/delete-alumno/<%=usuario.id_usuario%>" class="boton-tabla">Eliminar</a>
+
+                                            <% var flag = 0 %>
+                                            <% materias.forEach((materia, i2) => { %>
+
+                                                <%console.log("BANDERA FUERA: " + flag)%>
+                                                <% if(usuario.id_usuario == materia.profesor_id && flag == 0){ %>
+                                                    <a href="#" class="boton-tabla-disabled">NO ELIMINAR</a>
+                                                    <% flag = 1 %>
+                                                    <%console.log("BANDERA COINCIDE: " + flag)%>
+                                                <%}else if(i2 === materias.length - 1 && flag == 0){%>
+                                                        <a href="/delete-docente/<%=usuario.id_usuario%>" class="boton-tabla" id="deletebtnadm">Eliminar</a>
+                                                        <%console.log("BANDERA NO COINCIDE")%>
+                                                        <%console.log("*************")%>
+                                                <%}%>
+                                            <%})%>
                                         </td>
                                     <% } %>
                                 </tr>
@@ -193,4 +209,14 @@
 
     
 </body>
+<script>
+    console.log("DENTRO DE SCRIPT");
+
+    const btnadm = document.querySelector('#deletebtnadm');
+
+    btnadm.addEventListener('click', () => {
+        console.log('Click hecho')
+    })
+
+</script>
 </html>

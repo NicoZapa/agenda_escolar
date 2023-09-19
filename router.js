@@ -268,16 +268,23 @@ router.get('/editar-docente/:id', (req, res) => {
     })
 })
 
-//ELIMINAR ALUMNO
-router.get('/delete-alumno/:id', (req, res) => {
+//ELIMINAR DOCENTE
+router.get('/delete-docente/:id', (req, res) => {
     const id = req.params.id;
 
     // Primero, elimina registros relacionados en inscripcion_alumnos_materias
-    conexion.query('DELETE FROM usuarios WHERE alumno_id = ?', [id], (error, results) => {
+    conexion.query("DELETE FROM materias WHERE profesor_id = ?", [id], (error, results) => {
         if (error) {
             throw error;
         } else {
-            res.redirect('/administrador');
+            // Luego, elimina el usuario de la tabla usuarios
+            conexion.query('DELETE FROM usuarios WHERE id_usuario = ?', [id], (error, results) => {
+                if (error) {
+                    throw error;
+                } else {
+                    res.redirect('/administrador');
+                }
+            });
         }
     });
 });

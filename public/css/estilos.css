@@ -41,6 +41,19 @@
     margin-bottom: 5px;
 }
 
+.boton-tabla-disabled {
+    display: inline-block;
+    padding: 5px 10px; /* Espaciado interno */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    background-color: #dfdfdf; /* Color de fondo */
+    color: #000000; /* Color del texto */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    margin-bottom: 5px;
+}
+
+
 .boton-volver {
     display: inline-block;
     padding: 10px 20px; /* Espaciado interno */

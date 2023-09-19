@@ -7,7 +7,7 @@ const app = express();
 //Utilizamos motor de plantillas ejs para luego poder poder utilizar HTML
 app.set('view engine', 'ejs');
 
-// Configurar el middleware para servir archivos estáticos (CSS)
+// Configurar el middleware para servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
 
