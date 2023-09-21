@@ -58,6 +58,7 @@
                                     <td class="text-center"><%= materia.nombre %> <%= materia.apellido %></td>
                                 <% } %>
                                 <td class="text-center">
+                                    <a href="asociar-alumno-materia/<%= materia.id_materia %>" class="boton-tabla">Asociar alumno</a>
                                     <a href="editar-materia/<%= materia.id_materia %>" class="boton-tabla">EDITAR</a>
                                     <a href="delete-materia/<%= materia.id_materia %>" class="boton-tabla"> ELIMINAR </a>
                                 </td>
@@ -69,7 +70,7 @@
                 
                 <div>
                     <a href="/crear-materia" class="boton">Crear materia</a>
-                    <a href="#" class="boton">Asociar alumno</a>
+                    
                 </div>
                 
             </div>
@@ -178,13 +179,12 @@
 
                                                 <%console.log("BANDERA FUERA: " + flag)%>
                                                 <% if(usuario.id_usuario == materia.profesor_id && flag == 0){ %>
-                                                    <a href="#" class="boton-tabla-disabled">NO ELIMINAR</a>
+                                                    <a class="boton-tabla-disabled" title="Debe eliminar primero la relacion del Docente a las materias">Eliminar</a>
                                                     <% flag = 1 %>
-                                                    <%console.log("BANDERA COINCIDE: " + flag)%>
+
                                                 <%}else if(i2 === materias.length - 1 && flag == 0){%>
                                                         <a href="/delete-docente/<%=usuario.id_usuario%>" class="boton-tabla" id="deletebtnadm">Eliminar</a>
-                                                        <%console.log("BANDERA NO COINCIDE")%>
-                                                        <%console.log("*************")%>
+
                                                 <%}%>
                                             <%})%>
                                         </td>

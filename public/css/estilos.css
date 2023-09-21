@@ -53,6 +53,9 @@
     margin-bottom: 5px;
 }
 
+.boton-tabla-disabled:hover{
+    cursor:not-allowed;
+}
 
 .boton-volver {
     display: inline-block;
@@ -71,4 +74,11 @@
     background-color: #00be56; /* Cambia el color de fondo al pasar el mouse */
 }
 
+/* MODAL */
+#modal::backdrop{
+    background-color: rgba(0, 0, 0, 0.7);
+}
 
+#modal{
+    width: 70%;
+}

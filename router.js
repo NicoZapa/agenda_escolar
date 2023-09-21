@@ -176,6 +176,51 @@ router.get('/delete-materia/:id', (req, res) => {
     })
 })
 
+
+//ASOCIAR MATERIA a ALUMNO
+router.get('/asociar-alumno-materia/:id', (req, res) => {
+
+    const id = req.params.id;
+
+    const query1 = "SELECT * FROM materias WHERE id_materia=?";
+    const query2 = "SELECT * FROM usuarios WHERE rol = 'Estudiante'";
+    const query3 = "SELECT * FROM inscripcion_alumnos_materias WHERE materia_id=?";
+    
+    conexion.query(query1, [id], (error1, results1) => {
+        if(error1){
+            throw error1;
+        }else{
+            conexion.query(query2, (error2, results2) => {
+                if(error2){
+                    throw error2;
+                }else{
+                    conexion.query(query3, [id] , (error3, results3) => {
+                        if(error3){
+                            throw error3;
+                        }else{
+                            console.log("*** MATERIAS ***");
+                            console.log(results1);
+
+                            console.log("*** ESTUDIANTES ***");
+                            console.log(results2);
+
+                            console.log("*** INSCRIPCIONES ***");
+                            console.log(results3);
+
+                            res.render('asociar-alumnomateria-admin.ejs', {
+                                materia: results1[0],
+                                estudiantes: results2,
+                                inscripciones: results3
+                            });
+                        }
+                    })
+                }
+            })
+        }
+    })
+
+})
+
 //*****************
 //******ALUMNOS
 

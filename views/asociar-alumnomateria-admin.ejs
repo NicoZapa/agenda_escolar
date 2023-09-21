@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>- Agenda Escolar -</title>
+        <link rel="stylesheet" type="css" href="css/estilos.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    </head>
+    <body>
+
+        <header>
+            <div>
+                <div class="logo">
+                    <p>Agenda Escolar</p>
+                </div>
+
+                <nav>
+                    <a href="/">Cerrar Sesion</a>
+                    <a href="#">¿Que es Agenda Escolar?</a>
+                    <a href="#">Mi Perfil</a>
+                    <a href="./index-docente">Inicio</a>
+                </nav>
+            </div>
+        </header>
+        
+        <section>
+
+            <% if (materia) {%>
+            <h3>Asociar alumno a <%=materia.nombre_materia%></h3>
+            <%}%>
+
+
+            <section>
+
+                <h4>Alumnos asignados</h4>
+                <button id="btn-abrir-modal" class="boton">+ Asignar</button>
+
+                <dialog id="modal">
+
+                    <h4>Formulario: Asignar alumno a <%=materia.nombre_materia%></h4>
+
+                    <div>
+                        <form action="POST">
+                            <select name="alumno" id="alumno">
+                                <% estudiantes.forEach((estudiante) => { %>
+                                    <option value="alumno" id="alumno" data-estudiante='<%= JSON.stringify(estudiante) %>'> 
+                                        <%=estudiante.apellido%> <%=estudiante.nombre%>   
+                                    </option>
+                                <%})%>
+                            </select>
+
+                            <input type="text" id="id" hidden>
+
+                            
+
+                            <input type="text" id="apellido" name="apellido" disabled>
+
+                            <div>
+                                <button type="submit">Asignar</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+
+                    <button id="btn-cerrar-modal">Cerrar</button>
+                </dialog>
+
+                <div class="container">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Apellido</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Turno</th>
+                                <th class="text-center">Opcion</th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            <% inscripciones.forEach((inscripcion) => { %>
+        
+                            <tr>
+                                <td class="text-center"><%= inscripcion.apellido %></td>
+                                <td class="text-center"><%= inscripcion.nombre %></td>
+                                <td class="text-center"><%= inscripcion.turno %></td>
+                                <td class="text-center">
+                                    <a href="/editar-nota/<%= inscripcion.id_usuario %>/<%= alumno.id_materia %>" class="boton">Desasignar</a>
+                                </td>
+                            </tr>
+                            
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <div>
+
+                <form action="/alumno-a-materia" method="POST">
+
+                    
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </body>
+
+    <script>
+
+        //MODAL
+        const btnAbrirModal = document.querySelector('#btn-abrir-modal');
+        const btnCerrarModal = document.querySelector('#btn-cerrar-modal');
+        const modal = document.querySelector('#modal');
+
+        btnAbrirModal.addEventListener("click", () => {
+            modal.showModal();
+        })
+
+        btnCerrarModal.addEventListener('click', () => {
+            modal.close();
+        })
+
+        //INPUTs
+    document.addEventListener("DOMContentLoaded", function () {
+        const select = document.getElementById("alumnos");
+        const idInput = document.getElementById("id");
+        const apellidoInput = document.getElementById("apellido");
+
+        select.addEventListener("change", function () {
+            // Obtenemos el elemento seleccionado
+            const selectedOption = select.options[select.selectedIndex];
+            
+            // Obtener los datos del estudiante del atributo "data" (si los has incluido)
+            const estudianteData = JSON.parse(selectedOption.getAttribute("data-estudiante"));
+
+            // Actualizar los campos de entrada con los datos del estudiante
+            idInput.value = estudianteData.id;
+            apellidoInput.value = estudianteData.apellido;
+        });
+    });
+    </script>
+
+</html>
