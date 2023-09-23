@@ -29,7 +29,7 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">ID</th>
+                        <th class="text-center" hidden>ID</th>
                         <th class="text-center">Materia</th>
                         <th class="text-center">Opcion</th>
                     </tr>
@@ -38,7 +38,7 @@
                 <tbody>
                     <% results.forEach((materia) => {%>
                     <tr>
-                        <td class="text-center"> <%= materia.id_materia %></td>
+                        <td class="text-center" hidden> <%= materia.id_materia %></td>
                         <td class="text-center"> <%= materia.nombre_materia %> </td>
                         <td class="text-center">
                             <a href="./notas-cursos-docente/<%= materia.id_materia %>">Visualizar</a>

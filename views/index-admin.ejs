@@ -58,7 +58,7 @@
                                     <td class="text-center"><%= materia.nombre %> <%= materia.apellido %></td>
                                 <% } %>
                                 <td class="text-center">
-                                    <a href="asociar-alumno-materia/<%= materia.id_materia %>" class="boton-tabla">Asociar alumno</a>
+                                    <a href="asociar-alumno-materia/<%= materia.id_materia %>" class="boton-tabla">Alumnos Asociados</a>
                                     <a href="editar-materia/<%= materia.id_materia %>" class="boton-tabla">EDITAR</a>
                                     <a href="delete-materia/<%= materia.id_materia %>" class="boton-tabla"> ELIMINAR </a>
                                 </td>
@@ -209,14 +209,5 @@
 
     
 </body>
-<script>
-    console.log("DENTRO DE SCRIPT");
 
-    const btnadm = document.querySelector('#deletebtnadm');
-
-    btnadm.addEventListener('click', () => {
-        console.log('Click hecho')
-    })
-
-</script>
 </html>

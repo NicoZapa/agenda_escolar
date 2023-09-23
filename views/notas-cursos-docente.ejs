@@ -36,7 +36,7 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">ID Alumno</th>
+                        <th class="text-center" hidden>ID Alumno</th>
                         <th class="text-center">Apellido</th>
                         <th class="text-center">Nombre</th>
                         <th class="text-center">Turno</th>
@@ -51,7 +51,7 @@
                     <% alumnos.forEach((alumno) => { %>
 
                     <tr>
-                        <td class="text-center"><%= alumno.id_usuario %></td>
+                        <td class="text-center" hidden><%= alumno.id_usuario %></td>
                         <td class="text-center"><%= alumno.apellido %></td>
                         <td class="text-center"><%= alumno.nombre %></td>
                         <td class="text-center"><%= alumno.turno %></td>

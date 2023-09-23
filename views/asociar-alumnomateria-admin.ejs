@@ -28,8 +28,7 @@
 
             <% if (materia) {%>
             <h3>Asociar alumno a <%=materia.nombre_materia%></h3>
-            <%}%>
-
+            <h3>ID: <%=materia.id_materia%></h3>
 
             <section>
 
@@ -41,29 +40,37 @@
                     <h4>Formulario: Asignar alumno a <%=materia.nombre_materia%></h4>
 
                     <div>
-                        <form action="POST">
-                            <select name="alumno" id="alumno">
+                        <form action="/save-inscripcion" method="POST">
+                            <select name="alumnoSeleccionado" id="alumnoSelect">
+
+                                <option disabled selected>Seleccione un alumno</option>
+
                                 <% estudiantes.forEach((estudiante) => { %>
-                                    <option value="alumno" id="alumno" data-estudiante='<%= JSON.stringify(estudiante) %>'> 
-                                        <%=estudiante.apellido%> <%=estudiante.nombre%>   
+                                    <option value="<%= estudiante.id_usuario %>" data-estudiante='<%= JSON.stringify(estudiante) %>'> 
+                                        <%= estudiante.apellido %> <%= estudiante.nombre %>   
                                     </option>
-                                <%})%>
+                                <% }) %>
                             </select>
 
-                            <input type="text" id="id" hidden>
+                            <div>
+                                <input type="text" id="idmateria" name="idmateria" value="<%=materia.id_materia%>" hidden>
+                            </div>
+            <%}%>
 
-                            
-
-                            <input type="text" id="apellido" name="apellido" disabled>
+                            <select name="turnoinscripcion" id="turnoinscripcion">
+                                <option selected disabled>Seleccione un turno</option>
+                                <option value="Mañana">Mañana</option>
+                                <option value="Tarde">Tarde</option>
+                            </select>
 
                             <div>
-                                <button type="submit">Asignar</button>
+                                <button type="submit" id="btn-cerrar-modal">Asignar</button>
                             </div>
                             
                         </form>
                     </div>
 
-                    <button id="btn-cerrar-modal">Cerrar</button>
+                    <button type="submit" id="btn btn-primary btn-cerrar-modal">Cerrar</button>
                 </dialog>
 
                 <div class="container">
@@ -85,7 +92,7 @@
                                 <td class="text-center"><%= inscripcion.nombre %></td>
                                 <td class="text-center"><%= inscripcion.turno %></td>
                                 <td class="text-center">
-                                    <a href="/editar-nota/<%= inscripcion.id_usuario %>/<%= alumno.id_materia %>" class="boton">Desasignar</a>
+                                    <a href="#" class="boton">Desasignar</a>
                                 </td>
                             </tr>
                             
@@ -125,24 +132,20 @@
             modal.close();
         })
 
-        //INPUTs
-    document.addEventListener("DOMContentLoaded", function () {
-        const select = document.getElementById("alumnos");
-        const idInput = document.getElementById("id");
-        const apellidoInput = document.getElementById("apellido");
+        //INPUTS
+        // Obtén referencia al select y al input
+        const selectAlumno = document.getElementById('alumnoSelect');
+        const inputAlumnoId = document.getElementById('idalumno');
 
-        select.addEventListener("change", function () {
-            // Obtenemos el elemento seleccionado
-            const selectedOption = select.options[select.selectedIndex];
-            
-            // Obtener los datos del estudiante del atributo "data" (si los has incluido)
-            const estudianteData = JSON.parse(selectedOption.getAttribute("data-estudiante"));
+        // Agrega un evento de cambio al select
+        selectAlumno.addEventListener('change', () => {
+            // Obtiene el valor seleccionado del select
+            const selectedAlumnoId = selectAlumno.value;
 
-            // Actualizar los campos de entrada con los datos del estudiante
-            idInput.value = estudianteData.id;
-            apellidoInput.value = estudianteData.apellido;
+            // Asigna el valor del input con el ID del alumno seleccionado
+            inputAlumnoId.value = selectedAlumnoId;
         });
-    });
+        
     </script>
 
 </html>

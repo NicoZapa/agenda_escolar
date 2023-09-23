@@ -184,7 +184,7 @@ router.get('/asociar-alumno-materia/:id', (req, res) => {
 
     const query1 = "SELECT * FROM materias WHERE id_materia=?";
     const query2 = "SELECT * FROM usuarios WHERE rol = 'Estudiante'";
-    const query3 = "SELECT * FROM inscripcion_alumnos_materias WHERE materia_id=?";
+    const query3 = "SELECT u.id_usuario, u.nombre, u.apellido, i.turno FROM inscripcion_alumnos_materias AS i  INNER JOIN usuarios AS u ON u.id_usuario = i.alumno_id  INNER JOIN materias AS ma ON ma.id_materia = i.materia_id  WHERE materia_id = ?;";
     
     conexion.query(query1, [id], (error1, results1) => {
         if(error1){
@@ -341,6 +341,7 @@ router.get('/delete-docente/:id', (req, res) => {
 const crud = require('./controllers/crud'); // => Importa el controlador de CRUD
 const crudAdminMaterias = require('./controllers/crudadmin-materias');
 const crudAdminAlumnos = require('./controllers/crudadmin-alumnos');
+const crudAdminInscripciones = require('./controllers/crudadmin-inscripciones');
 const crudContrasenia = require('./controllers/crudcontrasenia');
 
 //CRUD DOCENTE
@@ -353,6 +354,9 @@ router.post('/editar-materia', crudAdminMaterias.update);
 //CRUD ADMIN ALUMNOS
 router.post('/save-usuario', crudAdminAlumnos.save);
 router.post('/editar-usuario', crudAdminAlumnos.update);
+
+//CRUD INSCRIPCION
+router.post('/save-inscripcion', crudAdminInscripciones.save);
 
 //RESET PASSWORD
 router.post('/reset-password', crudContrasenia.update);
