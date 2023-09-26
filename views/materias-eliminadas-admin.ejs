@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- Agenda Escolar -</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+    <header>
+        <div>
+            <div class="logo">
+                <p>Agenda Escolar</p>
+            </div>
+
+            <nav>
+                <a href="/">Cerrar Sesion</a>
+                <a href="#">¿Que es Agenda Escolar?</a>
+                <a href="#">Mi Perfil</a>
+                <a href="./index-docente">Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <h1>Bienvenido Administrador</h1>
+        <div id="botones-inicio">
+
+            <div class="container">
+
+                <h4>MATERIAS ELIMINADAS</h4>
+
+                <table class="table table-bordered table-striped table-hover">
+                    
+                    <thead>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Division</th>
+                        <th class="text-center">Año</th>
+                        <th class="text-center">Accion</th>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <%materias.forEach((materia) {%>
+                                <td><%=materia.nombre_materia%></td>
+                                <td><%=materia.division%></td>
+                                <td><%=materia.anio_cursada%></td>
+                                <td>
+                                    <a href="#" class="boton-crear">Habilitar</a>
+                                </td>
+                            <%})%>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </section>
+
+    <a href="/" class="boton-volver">VOLVER AL LOGIN</a>
+
+</body>
+
+</html>

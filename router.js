@@ -12,10 +12,6 @@ router.get('/', (req, res) => {
 
 //******************************************************
 //************** DOCENTE *************************
-//INICIO
-/*router.get('/docente', (req, res) => {
-    res.render('index-docente.ejs');
-})*/
 
 //CURSOS DOCENTE
 router.get('/docente', (req, res) => {
@@ -34,7 +30,7 @@ router.get('/notas-cursos-docente/:id', (req, res) => {
 
     const id = req.params.id;
 
-    conexion.query('SELECT u.id_usuario, u.nombre, u.apellido, u.dni, ma.id_materia, ma.nombre_materia, ma.anio_cursada, ma.division , i.turno, i.calificacion_trimestre1, i.calificacion_trimestre2, i.calificacion_trimestre3 FROM inscripcion_alumnos_materias AS i INNER JOIN usuarios AS u ON u.id_usuario = i.alumno_id INNER JOIN materias AS ma ON ma.id_materia = i.materia_id WHERE materia_id = ?;', [id], (error, results) => {
+    conexion.query('SELECT u.id_usuario, u.nombre, u.apellido, u.dni, u.estado, ma.id_materia, ma.nombre_materia, ma.anio_cursada, ma.division , i.turno, i.calificacion_trimestre1, i.calificacion_trimestre2, i.calificacion_trimestre3 FROM inscripcion_alumnos_materias AS i INNER JOIN usuarios AS u ON u.id_usuario = i.alumno_id INNER JOIN materias AS ma ON ma.id_materia = i.materia_id WHERE materia_id = ?;', [id], (error, results) => {
         if(error){
             throw error;
         }else{
@@ -167,11 +163,22 @@ router.get('/delete-materia/:id', (req, res) => {
 
     const id = req.params.id;
 
-    conexion.query('DELETE FROM materias WHERE id_materia = ?', [id], (error, results) => {
+    conexion.query('UPDATE materias SET estado = 0 WHERE id_materia= ?;', [id], (error, results) => {
         if(error){
             throw error;
         }else{
             res.redirect('/administrador');
+        }
+    })
+})
+
+router.get('/materias-eliminadas', (req, res) => {
+
+    conexion.query('SELECT * FROM materias WHERE estado = 0', (error, results) => {
+        if(error){
+            throw error;
+        }else{
+            res.render('materias-eliminadas-admin.ejs', {materias: results});
         }
     })
 })
@@ -198,15 +205,6 @@ router.get('/asociar-alumno-materia/:id', (req, res) => {
                         if(error3){
                             throw error3;
                         }else{
-                            console.log("*** MATERIAS ***");
-                            console.log(results1);
-
-                            console.log("*** ESTUDIANTES ***");
-                            console.log(results2);
-
-                            console.log("*** INSCRIPCIONES ***");
-                            console.log(results3);
-
                             res.render('asociar-alumnomateria-admin.ejs', {
                                 materia: results1[0],
                                 estudiantes: results2,
@@ -260,7 +258,7 @@ router.get('/delete-alumno/:id', (req, res) => {
             throw error;
         } else {
             // Luego, elimina el usuario de la tabla usuarios
-            conexion.query('DELETE FROM usuarios WHERE id_usuario = ?', [id], (error, results) => {
+            conexion.query('UPDATE usuarios SET estado = 0 WHERE id_usuario= ?;', [id], (error, results) => {
                 if (error) {
                     throw error;
                 } else {

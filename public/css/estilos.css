@@ -29,6 +29,54 @@
     background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse */
 }
 
+.boton-crear{
+    display: inline-block;
+    padding: 10px 20px; /* Espaciado interno */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    background-color: #00b90f; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    margin-bottom: 10px;
+}
+
+.boton-crear:hover{
+    display: inline-block;
+    padding: 10px 20px; /* Espaciado interno */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    background-color: #01750b; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    margin-bottom: 10px;
+}
+
+.boton-eliminar{
+    display: inline-block;
+    padding: 10px 20px; /* Espaciado interno */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    background-color: #d40000; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    margin-bottom: 10px;
+}
+
+.boton-eliminar:hover{
+    display: inline-block;
+    padding: 10px 20px; /* Espaciado interno */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    background-color: #9c0000; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    margin-bottom: 10px;
+}
+
 .boton-tabla {
     display: inline-block;
     padding: 5px 10px; /* Espaciado interno */
@@ -67,6 +115,12 @@
     border-radius: 5px; /* Bordes redondeados */
     cursor: pointer; /* Cambia el cursor al pasar el mouse */
     margin-bottom: 10px;
+}
+
+/* CONTAINERS */
+.flex-cont{
+    display: flex;
+    justify-content: space-between;
 }
 
 /* Estilos adicionales cuando el mouse pasa sobre el enlace */

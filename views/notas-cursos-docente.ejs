@@ -49,7 +49,7 @@
         
                 <tbody>
                     <% alumnos.forEach((alumno) => { %>
-
+                        <% if(alumno.estado == 1) {%>
                     <tr>
                         <td class="text-center" hidden><%= alumno.id_usuario %></td>
                         <td class="text-center"><%= alumno.apellido %></td>
@@ -63,6 +63,7 @@
                             <a href="/delete/<%= alumno.id_usuario %>/<%= alumno.id_materia %>" class="boton">ELIMINAR</a>
                         </td>
                     </tr>
+                        <% } %>
                     
                     <% }) %>
                 </tbody>

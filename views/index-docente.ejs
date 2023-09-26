@@ -37,6 +37,7 @@
 
                 <tbody>
                     <% results.forEach((materia) => {%>
+                        <% if(materia.estado == 1) {%>
                     <tr>
                         <td class="text-center" hidden> <%= materia.id_materia %></td>
                         <td class="text-center"> <%= materia.nombre_materia %> </td>
@@ -44,6 +45,7 @@
                             <a href="./notas-cursos-docente/<%= materia.id_materia %>">Visualizar</a>
                         </td>
                     </tr>
+                        <% }%>
                     <% }) %>
                 </tbody>
 

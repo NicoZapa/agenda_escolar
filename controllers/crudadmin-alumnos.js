@@ -32,8 +32,9 @@ exports.save = (req, res) => {
     const direccion = req.body.direccion;
     const telefono = req.body.telefono;
     const contrasenia = req.body.contrasenia;
+    const estado = 1;
 
-    conexion.query('INSERT INTO usuarios (nombre, apellido, dni, correo, contrasenia, fecha_nacimiento, direccion, telefono, rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);', [nombre, apellido, dni, correo, contrasenia, fecha_nacimiento, direccion, telefono, rol], (error, results) => {
+    conexion.query('INSERT INTO usuarios (nombre, apellido, dni, correo, contrasenia, fecha_nacimiento, direccion, telefono, rol, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [nombre, apellido, dni, correo, contrasenia, fecha_nacimiento, direccion, telefono, rol, estado], (error, results) => {
         if(error){
             throw error;
         }else{

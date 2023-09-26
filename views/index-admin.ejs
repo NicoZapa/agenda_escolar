@@ -35,6 +35,10 @@
                 <!--***** MATERIAS *****-->
 
                 <h4>MATERIAS</h4>
+                <div class="flex-cont">
+                    <a href="/crear-materia" class="boton-crear">Crear materia</a>
+                    <a href="/materias-eliminadas" class="boton-eliminar">Eliminadas</a>
+                </div>
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                         <tr>
@@ -50,6 +54,7 @@
                     <tbody>
                         <% materias.forEach((materia) => { %>
                             <tr>
+                                <% if(materia.estado == 1) {%>
                                 <td class="text-center" hidden><%= materia.id_materia %></td>
                                 <td class="text-center"><%= materia.nombre_materia %></td>
                                 <td class="text-center"><%= materia.anio_cursada %></td>
@@ -62,24 +67,25 @@
                                     <a href="editar-materia/<%= materia.id_materia %>" class="boton-tabla">EDITAR</a>
                                     <a href="delete-materia/<%= materia.id_materia %>" class="boton-tabla"> ELIMINAR </a>
                                 </td>
+                                <% }%>
                             </tr>
                         <% }) %>
                     </tbody>
                     
                 </table>
                 
-                <div>
-                    <a href="/crear-materia" class="boton">Crear materia</a>
-                    
-                </div>
-                
             </div>
+        
             
-            
+
             <!--***** ALUMNOS *****-->
             <div class="container">
 
                 <h4>ALUMNOS</h4>
+                <div class="flex-cont">
+                    <a href="/crear-alumno" class="boton-crear">Crear Alumno</a>
+                    <a href="#" class="boton-eliminar">Eliminados</a>
+                </div>
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="thead-light">
                         <tr>
@@ -100,7 +106,10 @@
                         <% usuarios.forEach((usuario) => { %>
                             
                                 <tr>
-                                    <% if(usuario.rol == "Estudiante") {%>
+                                    <% if(usuario.rol == "Estudiante" && usuario.estado == 1) {%>
+
+                                        <%console.log(usuario)%>
+
                                         <% const fechaOriginal = new Date(usuario.fecha_nacimiento); %>
                                         <% const año = fechaOriginal.getFullYear(); %>
                                         <% const mes = String(fechaOriginal.getMonth() + 1).padStart(2, '0'); %> 
@@ -126,15 +135,17 @@
                     </tbody>
                     
                 </table>
-                <div>
-                    <a href="/crear-alumno" class="boton">Crear Alumno</a>
-                </div>
+                
             </div>
 
             <!--**** DOCENTES ****-->
             <div class="container">
                 
                 <h4>DOCENTES</h4>
+                <div class="flex-cont">
+                    <a href="/crear-docente" class="boton-crear">Crear Docente</a>
+                    <a href="#" class="boton-eliminar">Eliminados</a>
+                </div>
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="thead-light">
                         <tr>
@@ -155,7 +166,7 @@
                         <% usuarios.forEach((usuario, i1) => { %>
                             
                                 <tr>
-                                    <% if(usuario.rol == "Docente") {%>
+                                    <% if(usuario.rol == "Docente" && usuario.estado == 1) {%>
                                         <% const fechaOriginal = new Date(usuario.fecha_nacimiento); %>
                                         <% const año = fechaOriginal.getFullYear(); %>
                                         <% const mes = String(fechaOriginal.getMonth() + 1).padStart(2, '0'); %> 
@@ -177,7 +188,6 @@
                                             <% var flag = 0 %>
                                             <% materias.forEach((materia, i2) => { %>
 
-                                                <%console.log("BANDERA FUERA: " + flag)%>
                                                 <% if(usuario.id_usuario == materia.profesor_id && flag == 0){ %>
                                                     <a class="boton-tabla-disabled" title="Debe eliminar primero la relacion del Docente a las materias">Eliminar</a>
                                                     <% flag = 1 %>
@@ -195,9 +205,7 @@
                     
                 </table>
 
-                <div>
-                    <a href="/crear-docente" class="boton">Crear Docente</a>
-                </div>
+                
                 
             </div>
             
