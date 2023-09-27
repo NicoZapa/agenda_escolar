@@ -23,8 +23,9 @@ exports.save = (req, res) => {
     const anio = req.body.anio;
     const division = req.body.division;
     const docente = req.body.docente;
+    const estado = 1;
 
-    conexion.query('INSERT INTO materias (nombre_materia, division, anio_cursada, profesor_id) VALUES (?, ?, ?, ?);', [nombremateria, division, anio, docente], (error, results) => {
+    conexion.query('INSERT INTO materias (nombre_materia, division, anio_cursada, profesor_id, estado) VALUES (?, ?, ?, ?, ?);', [nombremateria, division, anio, docente, estado], (error, results) => {
         if(error){
             throw error;
         }else{

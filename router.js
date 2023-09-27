@@ -172,6 +172,7 @@ router.get('/delete-materia/:id', (req, res) => {
     })
 })
 
+//MATERIAS ELIMINADAS
 router.get('/materias-eliminadas', (req, res) => {
 
     conexion.query('SELECT * FROM materias WHERE estado = 0', (error, results) => {
@@ -179,6 +180,20 @@ router.get('/materias-eliminadas', (req, res) => {
             throw error;
         }else{
             res.render('materias-eliminadas-admin.ejs', {materias: results});
+        }
+    })
+})
+
+//HABILITAR MATERIA
+router.get('/materia-habilitada/:id', (req, res) => {
+
+    const id = req.params.id;
+
+    conexion.query('UPDATE materias SET estado = 1 WHERE id_materia= ?;', [id], (error, results) => {
+        if(error){
+            throw error;
+        }else{
+            res.redirect('/materias-eliminadas');
         }
     })
 })

@@ -44,16 +44,18 @@
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <%materias.forEach((materia) {%>
-                                <td><%=materia.nombre_materia%></td>
-                                <td><%=materia.division%></td>
-                                <td><%=materia.anio_cursada%></td>
-                                <td>
-                                    <a href="#" class="boton-crear">Habilitar</a>
+                        <%materias.forEach((materia) => {%>
+                            <tr>
+                                
+                                <td class="text-center"><%=materia.nombre_materia%></td>
+                                <td class="text-center"><%=materia.division%></td>
+                                <td class="text-center"><%=materia.anio_cursada%></td>
+                                <td class="text-center">
+                                    <a href="/materia-habilitada/<%= materia.id_materia %>" class="boton-crear">Habilitar</a>
                                 </td>
-                            <%})%>
-                        </tr>
+                                
+                            </tr>
+                        <%})%>
                     </tbody>
                 </table>
                 
@@ -61,8 +63,7 @@
         </div>
     </section>
 
-    <a href="/" class="boton-volver">VOLVER AL LOGIN</a>
-
+    <a href="/administrador" class="boton-volver">ATRAS</a>
 </body>
 
 </html>
