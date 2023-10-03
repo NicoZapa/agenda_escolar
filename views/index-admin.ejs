@@ -188,13 +188,11 @@
                                             <% var flag = 0 %>
                                             <% materias.forEach((materia, i2) => { %>
 
-                                                <% if(usuario.id_usuario == materia.profesor_id && flag == 0){ %>
+                                                <% if(usuario.id_usuario == materia.profesor_id && flag == 0 && materia.estado == 1){ %>
                                                     <a class="boton-tabla-disabled" title="Debe eliminar primero la relacion del Docente a las materias">Eliminar</a>
                                                     <% flag = 1 %>
-
                                                 <%}else if(i2 === materias.length - 1 && flag == 0){%>
                                                         <a href="/delete-docente/<%=usuario.id_usuario%>" class="boton-tabla" id="deletebtnadm">Eliminar</a>
-
                                                 <%}%>
                                             <%})%>
                                         </td>

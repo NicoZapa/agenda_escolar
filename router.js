@@ -172,7 +172,7 @@ router.get('/delete-materia/:id', (req, res) => {
     })
 })
 
-//MATERIAS ELIMINADAS
+//LISTA DE MATERIAS ELIMINADAS
 router.get('/materias-eliminadas', (req, res) => {
 
     conexion.query('SELECT * FROM materias WHERE estado = 0', (error, results) => {
